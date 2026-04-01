@@ -1,475 +1,1125 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="강성희 포트폴리오 홈페이지" />
-  <title>강성희 | Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="강성희의 전략적 정보 큐레이터 포트폴리오 - 데이터를 가치 있는 인사이트로 변환합니다.">
+    <title>강성희 | Strategic Information Curator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== Reset & Base ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    :root {
-      --bg: #fdfaf5;
-      --surface: rgba(255, 255, 255, 0.82);
-      --text: #1a2634;
-      --muted: #4a5d75;
-      --accent-1: #2c5f9e;
-      --accent-2: #5887bc;
-      --border: rgba(44, 95, 158, 0.12);
-      --gradient: linear-gradient(135deg, #2c5f9e, #5887bc);
-    }
+        :root {
+            --bg-primary: #fdfaf5;
+            --bg-secondary: #f5f2ed;
+            --bg-card: rgba(255, 255, 255, 0.8);
+            --text-primary: #1a2634;
+            --text-secondary: #4a5d75;
+            --text-muted: #8a9cb0;
+            --accent-1: #2c5f9e;
+            --accent-2: #5887bc;
+            --accent-3: #7aa5d9;
+            --accent-4: #4a90e2;
+            --gradient-1: linear-gradient(135deg, #2c5f9e, #5887bc);
+            --gradient-2: linear-gradient(135deg, #1a2634, #2c5f9e);
+            --border-color: rgba(44, 95, 158, 0.1);
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
 
-    html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    body {
-      font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
+        body {
+            font-family: 'Inter', 'Noto Sans KR', -apple-system, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
 
-    .bg-gradient-orbs {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
+        /* ===== Animated Background ===== */
+        .bg-gradient-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
 
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.14;
-      animation: floatOrb 20s ease-in-out infinite;
-    }
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: floatOrb 20s ease-in-out infinite;
+        }
 
-    .orb-1 {
-      width: 520px;
-      height: 520px;
-      background: #2c5f9e;
-      top: -180px;
-      right: -80px;
-    }
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--accent-1);
+            top: -200px;
+            right: -100px;
+            animation-delay: 0s;
+        }
 
-    .orb-2 {
-      width: 360px;
-      height: 360px;
-      background: #7aa5d9;
-      bottom: -120px;
-      left: -80px;
-      animation-delay: -7s;
-    }
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-3);
+            bottom: -100px;
+            left: -100px;
+            animation-delay: -7s;
+        }
 
-    .orb-3 {
-      width: 280px;
-      height: 280px;
-      background: #4a90e2;
-      top: 45%;
-      left: 52%;
-      animation-delay: -13s;
-    }
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-4);
+            top: 50%;
+            left: 50%;
+            animation-delay: -14s;
+        }
 
-    @keyframes floatOrb {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      25% { transform: translate(40px, -70px) scale(1.08); }
-      50% { transform: translate(-20px, 50px) scale(0.96); }
-      75% { transform: translate(50px, 20px) scale(1.04); }
-    }
+        @keyframes floatOrb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -80px) scale(1.1); }
+            50% { transform: translate(-30px, 60px) scale(0.95); }
+            75% { transform: translate(70px, 30px) scale(1.05); }
+        }
 
-    .content {
-      position: relative;
-      z-index: 1;
-      width: min(1100px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 48px 0 72px;
-    }
+        /* ===== Navigation ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 15, 0.7);
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
 
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 32px 0 56px;
-    }
+        .nav-logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
 
-    .hero-content {
-      width: 100%;
-      max-width: 880px;
-      text-align: center;
-    }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
 
-    .hero-image-container {
-      margin-bottom: 34px;
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
 
-    .hero-image-container img {
-      width: 100%;
-      max-width: 720px;
-      border-radius: 28px;
-      border: 8px solid rgba(255,255,255,0.95);
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.1);
-    }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
 
-    h1 {
-      font-size: clamp(2.4rem, 5.6vw, 4.4rem);
-      line-height: 1.08;
-      letter-spacing: -1.8px;
-      margin-bottom: 18px;
-      font-weight: 800;
-    }
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
 
-    .gradient-text {
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
-    .intro {
-      max-width: 640px;
-      margin: 0 auto;
-      font-size: 1.08rem;
-      color: var(--muted);
-    }
+        /* ===== Content Wrapper ===== */
+        .content {
+            position: relative;
+            z-index: 1;
+        }
 
-    .projects {
-      padding: 12px 0 80px;
-    }
+        /* ===== Hero Section ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px 80px;
+            text-align: center;
+        }
 
-    .section-header {
-      text-align: center;
-      margin-bottom: 34px;
-    }
+        .hero-content {
+            max-width: 800px;
+        }
 
-    .section-label {
-      display: inline-block;
-      font-size: 0.8rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: var(--accent-2);
-      margin-bottom: 14px;
-    }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            border-radius: 100px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            font-size: 0.85rem;
+            color: var(--accent-2);
+            margin-bottom: 32px;
+            animation: fadeInUp 0.8s ease;
+        }
 
-    .section-title {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 800;
-      letter-spacing: -1px;
-      margin-bottom: 12px;
-    }
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-4);
+            animation: pulse 2s ease-in-out infinite;
+        }
 
-    .section-desc {
-      color: var(--muted);
-      max-width: 620px;
-      margin: 0 auto;
-    }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
 
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 28px;
-      align-items: stretch;
-    }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
 
-    .project-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      overflow: hidden;
-      box-shadow: 0 18px 50px rgba(44, 95, 158, 0.08);
-      backdrop-filter: blur(10px);
-    }
+        .hero h1 .gradient-text {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-    .project-visual {
-      padding: 28px;
-      min-height: 250px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
 
-    .news-visual {
-      background: linear-gradient(135deg, rgba(44, 95, 158, 0.1), rgba(88, 135, 188, 0.18));
-    }
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
 
-    .price-visual {
-      background: linear-gradient(135deg, rgba(26, 38, 52, 0.96), rgba(44, 95, 158, 0.92));
-      color: white;
-    }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
 
-    .monitor-mockup,
-    .price-chart-mockup {
-      width: 100%;
-      border-radius: 22px;
-    }
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 4px 20px rgba(108, 92, 231, 0.3);
+        }
 
-    .monitor-mockup {
-      background: white;
-      padding: 22px;
-      box-shadow: 0 20px 50px rgba(44, 95, 158, 0.12);
-    }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(108, 92, 231, 0.4);
+        }
 
-    .mock-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(0,0,0,0.08);
-      font-size: 0.78rem;
-      font-weight: 800;
-    }
+        .btn-secondary {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+        }
 
-    .mock-badge {
-      padding: 5px 10px;
-      border-radius: 999px;
-      font-size: 0.7rem;
-      font-weight: 800;
-    }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
 
-    .mock-badge.safe {
-      background: #e3f9e5;
-      color: #2ecc71;
-    }
+        /* ===== Section Common ===== */
+        section {
+            padding: 100px 40px;
+        }
 
-    .mock-news {
-      font-size: 0.98rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
 
-    .mock-comments {
-      background: #f8f9fa;
-      border-radius: 14px;
-      padding: 12px;
-    }
+        .section-label {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-2);
+            margin-bottom: 16px;
+        }
 
-    .mock-comment-item {
-      display: flex;
-      gap: 8px;
-      font-size: 0.76rem;
-      margin-bottom: 8px;
-    }
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
 
-    .mock-comment-item:last-child { margin-bottom: 0; }
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
 
-    .mock-toxic { color: #e74c3c; font-weight: 700; }
+        /* ===== Skills Section ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
 
-    .price-chart-mockup {
-      padding: 22px;
-      border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 20px 55px rgba(0,0,0,0.25);
-    }
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 36px 32px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .price-chart-mockup .mock-header {
-      color: #d8e7f8;
-      border-bottom-color: rgba(255,255,255,0.12);
-    }
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
 
-    .price-chart-title {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
+        .skill-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(108, 92, 231, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+        }
 
-    .price-chart-desc {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.72);
-      margin-bottom: 18px;
-    }
+        .skill-card:hover::before {
+            opacity: 1;
+        }
 
-    .chart-line {
-      width: 100%;
-      height: 130px;
-    }
+        .skill-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
 
-    .project-body {
-      padding: 28px 28px 30px;
-    }
+        .skill-icon.purple { background: rgba(108, 92, 231, 0.15); }
+        .skill-icon.pink { background: rgba(253, 121, 168, 0.15); }
+        .skill-icon.teal { background: rgba(0, 206, 201, 0.15); }
 
-    .project-body h3 {
-      font-size: 1.35rem;
-      margin-bottom: 10px;
-      font-weight: 800;
-    }
+        .skill-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
 
-    .project-body p {
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
+        .skill-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
 
-    .contact {
-      padding-top: 12px;
-    }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
 
-    .contact-card {
-      max-width: 760px;
-      margin: 0 auto;
-      text-align: center;
-      padding: 36px 28px;
-      border-radius: 28px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 18px 50px rgba(44, 95, 158, 0.08);
-    }
+        .skill-tag {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: rgba(108, 92, 231, 0.1);
+            color: var(--accent-2);
+            border: 1px solid rgba(108, 92, 231, 0.15);
+        }
 
-    .contact-card p:first-child {
-      color: var(--muted);
-      margin-bottom: 10px;
-      font-size: 1rem;
-    }
+        /* ===== Projects Section ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 28px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
 
-    .contact-email {
-      font-size: clamp(1.2rem, 3vw, 1.8rem);
-      font-weight: 800;
-      color: var(--text);
-      text-decoration: none;
-      word-break: break-all;
-    }
+        .project-card {
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+        }
 
-    .fade-in {
-      opacity: 0;
-      transform: translateY(26px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(108, 92, 231, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
 
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+        .project-thumbnail {
+            width: 100%;
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+        }
 
-    @media (max-width: 900px) {
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-    }
+        .project-thumbnail-bg {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
 
-    @media (max-width: 768px) {
-      .content {
-        width: min(100% - 24px, 1100px);
-        padding-top: 24px;
-      }
+        .thumb-1 { background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%); }
+        .thumb-2 { background: linear-gradient(135deg, #fd79a8 0%, #e17055 100%); }
+        .thumb-3 { background: linear-gradient(135deg, #00cec9 0%, #55efc4 100%); }
 
-      .hero {
-        min-height: auto;
-        padding-top: 28px;
-      }
+        .project-info {
+            padding: 28px;
+        }
 
-      .project-visual,
-      .project-body,
-      .contact-card {
-        padding-left: 20px;
-        padding-right: 20px;
-      }
-    }
-  </style>
+        .project-info h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .project-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--accent-2);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: gap 0.3s ease;
+        }
+
+        .project-link:hover {
+            gap: 12px;
+        }
+
+        /* ===== Stats Section ===== */
+        .stats-section {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .stat-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* ===== Contact Section ===== */
+        .contact-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 48px 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: rgba(108, 92, 231, 0.15);
+            border-color: rgba(108, 92, 231, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+
+        /* ===== Animations ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== Featured Project Spotlight ===== */
+        .featured-project {
+            background: linear-gradient(135deg, rgba(44, 95, 158, 0.05), rgba(88, 135, 188, 0.1));
+            border-radius: 32px;
+            padding: 80px 40px;
+            margin: 40px auto;
+            max-width: 1100px;
+            border: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-project::after {
+            content: "SAFE";
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 10rem;
+            font-weight: 900;
+            color: var(--accent-1);
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .featured-content {
+            z-index: 2;
+        }
+
+        .featured-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: var(--accent-1);
+            color: white;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+        }
+
+        .featured-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .featured-desc {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.8;
+        }
+
+        .featured-stats {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-val {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-1);
+        }
+
+        .feature-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .featured-visual {
+            position: relative;
+            z-index: 2;
+        }
+
+        .monitor-mockup {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 30px 60px rgba(44, 95, 158, 0.15);
+            border: 1px solid var(--border-color);
+        }
+
+        .mock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .mock-badge {
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 800;
+        }
+
+        .mock-badge.safe { background: #e3f9e5; color: #2ecc71; }
+        
+        .mock-news {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .mock-comments {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        .mock-comment-item {
+            font-size: 0.75rem;
+            margin-bottom: 8px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .mock-toxic { color: #e74c3c; font-weight: 700; }
+
+        /* Price Chart Specific Mockup */
+        .price-chart-mockup {
+            background: #1a2634;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .chart-line {
+            width: 100%;
+            height: 120px;
+            margin-top: 20px;
+            position: relative;
+            background: linear-gradient(to right, rgba(44, 95, 158, 0.1) 0%, transparent 100%);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chart-path {
+            stroke: var(--accent-3);
+            stroke-width: 3;
+            fill: none;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawPath 2s ease forwards;
+        }
+
+        .chart-forecast {
+            stroke: #f1c40f;
+            stroke-width: 3;
+            stroke-dasharray: 5, 5;
+            fill: none;
+        }
+
+        @keyframes drawPath {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @media (max-width: 900px) {
+            .featured-project {
+                grid-template-columns: 1fr;
+                padding: 60px 30px;
+                gap: 40px;
+            }
+            .featured-title { font-size: 2rem; }
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            nav {
+                padding: 16px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .hero h1 {
+                letter-spacing: -1px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-card {
+                padding: 32px 24px;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="bg-gradient-orbs">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-  </div>
+    <!-- Animated Background Orbs -->
+    <div class="bg-gradient-orbs">
+        <div class="orb orb-1" style="background: var(--accent-1);"></div>
+        <div class="orb orb-2" style="background: var(--accent-3);"></div>
+        <div class="orb orb-3" style="background: var(--accent-4);"></div>
+    </div>
 
-  <div class="content">
-    <section class="hero" id="home">
-      <div class="hero-content">
-        <div class="hero-image-container fade-in">
-          <img src="참고자료/ChatGPT Image 2026년 4월 1일 오전 09_28_21.png" alt="강성희 포트폴리오 대표 이미지" />
-        </div>
-        <h1 class="fade-in">
-          안녕하세요,<br />
-          <span class="gradient-text">강성희</span>입니다
-        </h1>
-        <p class="intro fade-in">
-          데이터를 이해하기 쉬운 흐름으로 정리하고, AI를 활용해 실시간 정보와 생활 데이터를 더 가치 있는 인사이트로 바꾸는 작업을 합니다.
-        </p>
-      </div>
-    </section>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">KSHEE.</div>
+        <ul class="nav-links">
+            <li><a href="#home">홈</a></li>
+            <li><a href="#skills">스킬</a></li>
+            <li><a href="#projects">프로젝트</a></li>
+            <li><a href="#contact">연락처</a></li>
+        </ul>
+    </nav>
 
-    <section class="projects" id="projects">
-      <div class="section-header fade-in">
-        <span class="section-label">Projects</span>
-        <h2 class="section-title">주요 프로젝트</h2>
-        <p class="section-desc">요청하신 두 개의 프로젝트만 남긴 간결한 포트폴리오 구성입니다.</p>
-      </div>
-
-      <div class="projects-grid">
-        <article class="project-card fade-in">
-          <div class="project-visual news-visual">
-            <div class="monitor-mockup">
-              <div class="mock-header">
-                <span style="color: var(--accent-1);">🛡 NEWS MONITOR</span>
-                <span class="mock-badge safe">SAFE: 86.7%</span>
-              </div>
-              <div class="mock-news">AI 기반 실시간 뉴스 가디언</div>
-              <div class="mock-comments">
-                <div class="mock-comment-item">● <span class="mock-toxic">유해 표현 감지 및 필터링</span></div>
-                <div class="mock-comment-item">● <span>실시간 뉴스 흐름 모니터링</span></div>
-                <div class="mock-comment-item">● <span>정제된 인사이트 제공</span></div>
-              </div>
+    <div class="content">
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="hero-image-container fade-in" style="margin-bottom: 40px; position: relative;">
+                    <img src="참고자료/ChatGPT Image 2026년 4월 1일 오전 09_28_21.png" alt="Strategic Information Curator" style="width: 100%; max-width: 700px; border-radius: 24px; box-shadow: 0 20px 80px rgba(0,0,0,0.1); border: 8px solid white;">
+                </div>
+                <h1>
+                    안녕하세요,<br>
+                    <span class="gradient-text">전략적 정보 큐레이터</span><br>
+                    강성희입니다
+                </h1>
+                <p>
+                    복잡한 데이터를 명확한 인사이트로 큐레이션하며,<br>
+                    구조화된 정보의 가치를 만드는 전문가입니다.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        포트폴리오 보기 →
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        문의하기
+                    </a>
+                </div>
             </div>
-          </div>
-          <div class="project-body">
-            <h3>AI 기반 실시간 뉴스 가디언</h3>
-            <p>실시간 뉴스 데이터와 반응 데이터를 수집하고, AI 기반 분석으로 유해 표현을 감지해 더 안전하고 신뢰할 수 있는 정보 환경을 지원하는 프로젝트입니다.</p>
-          </div>
-        </article>
+        </section>
 
-        <article class="project-card fade-in">
-          <div class="project-visual price-visual">
-            <div class="price-chart-mockup">
-              <div class="mock-header">
-                <span>🤖 AI PRICE FORECAST</span>
-                <span class="mock-badge" style="background: rgba(241,196,15,0.18); color: #f1c40f;">LSTM MODEL</span>
-              </div>
-              <div class="price-chart-title">서울 생필품 물가 예측 AI</div>
-              <div class="price-chart-desc">주요 품목 가격 변동을 예측해 생활 밀착형 인사이트를 제공합니다.</div>
-              <div class="chart-line">
-                <svg viewBox="0 0 400 130" style="width: 100%; height: 100%;">
-                  <path d="M0,102 L55,94 L110,98 L165,72 L220,82 L275,58 L320,64" stroke="#7aa5d9" stroke-width="3" fill="none"></path>
-                  <path d="M320,64 L360,46 L400,28" stroke="#f1c40f" stroke-width="3" stroke-dasharray="6 6" fill="none"></path>
-                  <circle cx="320" cy="64" r="4" fill="#7aa5d9"></circle>
-                  <circle cx="400" cy="28" r="4" fill="#f1c40f"></circle>
-                </svg>
-              </div>
+        <!-- Skills Section -->
+        <section id="skills">
+            <div class="section-header fade-in">
+                <span class="section-label">Expertise</span>
+                <h2 class="section-title">정보를 가치로 만드는 기술</h2>
+                <p class="section-desc">데이터의 홍수 속에서 전략적 의사결정을 돕는 핵심 역량입니다</p>
             </div>
-          </div>
-          <div class="project-body">
-            <h3>서울 생필품 물가 예측 AI</h3>
-            <p>서울시 생활 물가 데이터를 기반으로 주요 품목 가격 흐름을 예측하고, 소비자와 기획자 모두가 활용할 수 있는 실용적인 예측 정보를 제공하는 프로젝트입니다.</p>
-          </div>
-        </article>
-      </div>
-    </section>
+            <div class="skills-grid">
+                <div class="skill-card fade-in">
+                    <div class="skill-icon purple" style="background: rgba(44, 95, 158, 0.15); color: var(--accent-1);">📊</div>
+                    <h3>정보 아키텍처</h3>
+                    <p>방대한 데이터를 체계적으로 구조화하여 누구나 쉽게 이해할 수 있는 정보 지도를 설계합니다.</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag" style="background: rgba(44, 95, 158, 0.1); color: var(--accent-1); border-color: rgba(44, 95, 158, 0.15);">Structuring</span>
+                        <span class="skill-tag" style="background: rgba(44, 95, 158, 0.1); color: var(--accent-1); border-color: rgba(44, 95, 158, 0.15);">Hierarchy</span>
+                        <span class="skill-tag" style="background: rgba(44, 95, 158, 0.1); color: var(--accent-1); border-color: rgba(44, 95, 158, 0.15);">Taxonomy</span>
+                    </div>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon pink" style="background: rgba(88, 135, 188, 0.15); color: var(--accent-2);">💡</div>
+                    <h3>데이터 큐레이션</h3>
+                    <p>단순한 수집을 넘어, 목적에 맞는 데이터를 선별하고 의미를 부여하여 비즈니스 가치를 창출합니다.</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag" style="background: rgba(88, 135, 188, 0.1); color: var(--accent-2); border-color: rgba(88, 135, 188, 0.15);">Analysis</span>
+                        <span class="skill-tag" style="background: rgba(88, 135, 188, 0.1); color: var(--accent-2); border-color: rgba(88, 135, 188, 0.15);">Selection</span>
+                        <span class="skill-tag" style="background: rgba(88, 135, 188, 0.1); color: var(--accent-2); border-color: rgba(88, 135, 188, 0.15);">Contextualizing</span>
+                    </div>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon teal" style="background: rgba(122, 165, 217, 0.15); color: var(--accent-3);">🚀</div>
+                    <h3>전략적 인사이트</h3>
+                    <p>데이터 패턴을 분석하여 미래 성장을 위한 전략적 방향성과 구체적인 실행 방안을 제안합니다.</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag" style="background: rgba(122, 165, 217, 0.1); color: var(--accent-3); border-color: rgba(122, 165, 217, 0.15);">Forecasting</span>
+                        <span class="skill-tag" style="background: rgba(122, 165, 217, 0.1); color: var(--accent-3); border-color: rgba(122, 165, 217, 0.15);">Strategy</span>
+                        <span class="skill-tag" style="background: rgba(122, 165, 217, 0.1); color: var(--accent-3); border-color: rgba(122, 165, 217, 0.15);">Problem Solving</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section class="contact" id="contact">
-      <div class="contact-card fade-in">
-        <p>연락은 아래 이메일로 부탁드립니다.</p>
-        <a class="contact-email" href="mailto:contact@kshee.me">contact@kshee.me</a>
-      </div>
-    </section>
-  </div>
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-grid fade-in">
+                <div class="stat-item">
+                    <h3>100+</h3>
+                    <p>큐레이션 리포트</p>
+                </div>
+                <div class="stat-item">
+                    <h3>98%</h3>
+                    <p>데이터 정확도</p>
+                </div>
+                <div class="stat-item">
+                    <h3>12</h3>
+                    <p>협업 프로젝트</p>
+                </div>
+            </div>
+            <div class="section-desc fade-in">
+                <p>데이터의 홍수 속에서 전략적 의사결정을 돕는 핵심 역량입니다</p>
+            </div>
+        </section>
 
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -40px 0px'
-    });
+        <!-- Project Spotlight Section -->
+        <section id="spotlight" style="padding-top: 0;">
+            <div class="featured-project fade-in">
+                <div class="featured-content">
+                    <div class="featured-badge">Featured Case Study</div>
+                    <h2 class="featured-title">
+                        AI 기반 실시간 뉴스 가디언<br>
+                        <span class="gradient-text">(SHINee Guard)</span>
+                    </h2>
+                    <p class="featured-desc">
+                        복잡한 미디어 환경에서 AI 기술을 통해 정보의 투명성과 안전성을 확보합니다. 
+                        실시간 뉴스 데이터 수집, 댓글 독성 분석, 그리고 정제된 인사이트를 제공하는 전략적 정보 감시 체계입니다.
+                    </p>
+                    <div class="featured-stats">
+                        <div class="feature-item">
+                            <span class="feature-val">99%</span>
+                            <span class="feature-label">AI 정확도</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-val">Real-time</span>
+                            <span class="feature-label">모니터링</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-val">80.0%</span>
+                            <span class="feature-label">Clean Index</span>
+                        </div>
+                    </div>
+                    <a href="news_dashboard (2).html" class="btn btn-primary" target="_blank">대시보드 체험하기 →</a>
+                </div>
+                <div class="featured-visual">
+                    <div class="monitor-mockup">
+                        <div class="mock-header">
+                            <span style="font-weight: 800; font-size: 0.8rem; color: var(--accent-1);">🛡 NEWS MONITOR</span>
+                            <span class="mock-badge safe">SAFE: 86.7%</span>
+                        </div>
+                        <div class="mock-content">
+                            <div class="mock-news">샤이니 온유, 미니 5집 'TOUGH LOVE'.. 더 깊어진 분위기</div>
+                            <div class="mock-comments">
+                                <div class="mock-comment-item">● <span class="mock-toxic">** ** 댓글입니다 무시하세요.</span></div>
+                                <div class="mock-comment-item">● <span>활동 너무 기대돼요! 💎</span></div>
+                                <div class="mock-comment-item">● <span class="mock-toxic">*** 소리 좀 안 나게 해라.</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
-  </script>
+        <!-- Second Project Spotlight: Seoul Price Insight -->
+        <section id="spotlight-2" style="padding-top: 0;">
+            <div class="featured-project fade-in" style="background: linear-gradient(135deg, rgba(26, 38, 52, 0.05), rgba(44, 95, 158, 0.1));">
+                <div class="featured-visual" style="order: 2;">
+                    <div class="price-chart-mockup">
+                        <div class="mock-header" style="border-color: rgba(255, 255, 255, 0.1);">
+                            <span style="font-weight: 800; font-size: 0.8rem; color: var(--accent-3);">🤖 AI PRICE FORECAST</span>
+                            <span class="mock-badge" style="background: rgba(241, 196, 15, 0.2); color: #f1c40f;">LSTM MODEL</span>
+                        </div>
+                        <div class="mock-content">
+                            <div class="mock-news" style="color: white; font-size: 1.1rem;">삼겹살(600g) 가격 예측 추이</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 20px;">최근 7일 예측: +4.2% 상승 전망</div>
+                            <div class="chart-line">
+                                <svg viewBox="0 0 400 120" style="width: 100%; height: 100%;">
+                                    <!-- Actual Path -->
+                                    <path class="chart-path" d="M0,100 L50,90 L100,95 L150,70 L200,80 L250,60 L300,65" />
+                                    <!-- Forecast Path (Dashed) -->
+                                    <path class="chart-forecast" d="M300,65 L350,45 L400,30" />
+                                    <!-- Points -->
+                                    <circle cx="300" cy="65" r="4" fill="var(--accent-3)" />
+                                    <circle cx="400" cy="30" r="4" fill="#f1c40f" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-content" style="order: 1;">
+                    <div class="featured-badge" style="background: #1a2634;">Predictive Analytics</div>
+                    <h2 class="featured-title">
+                        서울 생필품 물가 예측 AI<br>
+                        <span class="gradient-text">(Price Insight)</span>
+                    </h2>
+                    <p class="featured-desc">
+                        서울시의 방대한 물가 데이터를 딥러닝 기반 시계열 모델(LSTM)로 분석하여 지능형 물가 관리 시스템을 구축했습니다. 상추, 오이, 삼겹살 등 주요 품목의 변동을 사전에 감지하고 최적의 구매 시점을 제안합니다.
+                    </p>
+                    <div class="featured-stats">
+                        <div class="feature-item">
+                            <span class="feature-val">95%</span>
+                            <span class="feature-label">예측 신뢰도</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-val">LSTM</span>
+                            <span class="feature-label">RNN 모델링</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-val">30 Days</span>
+                            <span class="feature-label">미래 전망</span>
+                        </div>
+                    </div>
+                    <a href="streamlit_app (1).py" class="btn btn-secondary" style="background: #1a2634; color: white;">AI 분석 엔진 보기 →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <div class="section-header fade-in">
+                <span class="section-label">Works</span>
+                <h2 class="section-title">전략적 히스토리</h2>
+                <p class="section-desc">성공적인 의사결정의 기반이 된 프로젝트들입니다</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-thumbnail">
+                        <div class="project-thumbnail-bg thumb-1" style="background: linear-gradient(135deg, #1a2634 0%, #2c5f9e 100%);">📑</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>기업 지식 맵 구축</h3>
+                        <p>기업의 산재된 정보를 통합하여 지식 자산으로 관리하는 프레임워크 개발</p>
+                        <a href="#" class="project-link">히스토리 보기 →</a>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-thumbnail">
+                        <div class="project-thumbnail-bg thumb-2" style="background: linear-gradient(135deg, #2c5f9e 0%, #5887bc 100%);">📊</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>마켓 인사이트 대시보드</h3>
+                        <p>글로벌 시장 트렌드 데이터를 실시간 큐레이션 및 시각화 리포트 제공</p>
+                        <a href="#" class="project-link">히스토리 보기 →</a>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-thumbnail">
+                        <div class="project-thumbnail-bg thumb-3" style="background: linear-gradient(135deg, #5887bc 0%, #7aa5d9 100%);">🧠</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>AI 기반 정보 필터링</h3>
+                        <p>사용자 맞춤형 고가치 정보 제공을 위한 알고리즘 설계 및 구현 프로젝트</p>
+                        <a href="#" class="project-link">히스토리 보기 →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="section-header fade-in">
+                <span class="section-label">Connect</span>
+                <h2 class="section-title">새로운 통찰을 나눕니다</h2>
+                <p class="section-desc">비즈니스의 잠재력을 깨우는 한 걸음, 함께 시작하세요</p>
+            </div>
+            <div class="contact-wrapper fade-in">
+                <div class="contact-card">
+                    <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 8px;">
+                        전략적 파트너를 찾고 계신가요? ✉️
+                    </p>
+                    <p style="font-size: 1.4rem; font-weight: 700;">
+                        contact@kshee.me
+                    </p>
+                    <div class="contact-links">
+                        <a href="https://github.com" class="contact-link" target="_blank">
+                            🐙 GitHub
+                        </a>
+                        <a href="https://linkedin.com" class="contact-link" target="_blank">
+                            💼 LinkedIn
+                        </a>
+                        <a href="#" class="contact-link" target="_blank">
+                            📝 Portfolio PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2026 강성희 · Strategic Information Curator · Built for Excellence</p>
+        </footer>
+    </div>
+
+    <script>
+        // ===== Scroll Fade-in Animation =====
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ===== Smooth Nav Background on Scroll =====
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(10, 10, 15, 0.9)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 15, 0.7)';
+            }
+        });
+    </script>
 </body>
 </html>
