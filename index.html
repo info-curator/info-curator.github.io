@@ -38,6 +38,9 @@
             --accent-2: #a29bfe;
             --accent-3: #fd79a8;
             --accent-4: #00cec9;
+            --shinee-mint: #79e5cb;
+            --safe: #2ecc71;
+            --toxic: #e74c3c;
             --gradient-1: linear-gradient(135deg, #6c5ce7, #a29bfe, #fd79a8);
             --gradient-2: linear-gradient(135deg, #00cec9, #6c5ce7);
             --border-color: rgba(255, 255, 255, 0.06);
@@ -756,6 +759,69 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* ===== SHINee Section Styles ===== */
+        .shinee-section {
+            background: rgba(121, 229, 203, 0.03);
+            border-top: 1px solid var(--border-color);
+            padding: 100px 40px;
+        }
+        .shinee-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 50px;
+        }
+        .shinee-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+        }
+        .shinee-card h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--accent-4);
+        }
+        .news-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .news-card-embedded {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 20px;
+            border-left: 4px solid var(--shinee-mint);
+        }
+        .news-card-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.8rem;
+        }
+        .safety-badge {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+        .safety-badge.safe { background: rgba(46, 204, 113, 0.2); color: var(--safe); }
+        .safety-badge.toxic { background: rgba(231, 76, 60, 0.2); color: var(--toxic); }
+        .monitor-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            font-size: 0.85rem;
+        }
+        .toxic-msg { color: var(--toxic); font-weight: 600; }
     </style>
 </head>
 <body>
@@ -785,7 +851,7 @@
                     Portfolio
                 </h1>
                 <div class="hero-image-container" style="margin-bottom: 40px; animation: fadeInUp 0.8s ease 0.15s both;">
-                    <img src="assets/profile.png" alt="Profile" style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--glass-border); object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                    <img src="assets/profile_new.png" alt="Profile" style="width: 250px; height: 250px; border-radius: 50%; border: 6px solid var(--accent-1); object-fit: cover; box-shadow: 0 20px 50px rgba(0,0,0,0.6); transition: transform 0.3s ease;">
                 </div>
                 <p>
                     디자인과 코드의 경계를 넘나들며, 사용자에게 
@@ -859,7 +925,7 @@
                     <div class="project-info">
                         <h3>SHINee News & Safety Monitor</h3>
                         <p>AI 기반 실시간 기사 댓글 모니터링 시스템 시뮬레이션 대시보드</p>
-                        <a href="projects/news_dashboard.html" class="project-link">대시보드 보기 →</a>
+                        <a href="#shinee-dashboard" class="project-link">대시보드 보기 →</a>
                     </div>
                 </div>
                 <div class="project-card fade-in">
@@ -873,6 +939,62 @@
                     </div>
                 </div>
 
+            </div>
+        </section>
+
+        <!-- SHINee News & Safety Monitor Dashboard -->
+        <section id="shinee-dashboard" class="shinee-section">
+            <div class="dashboard-container">
+                <div class="section-header fade-in">
+                    <span class="section-label">AI Safety</span>
+                    <h2 class="section-title">💎 SHINee News Monitor</h2>
+                    <p class="section-desc">AI 기반 실시간 뉴스 댓글 세이프가드 시스템 (시뮬레이션)</p>
+                </div>
+
+                <div class="shinee-stats-grid fade-in">
+                    <div class="shinee-card">
+                        <h3>📊 언론사별 보도 비중</h3>
+                        <div style="flex-grow: 1; position: relative;">
+                            <canvas id="sourceChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="shinee-card">
+                        <h3>📈 뉴스 발행 추이</h3>
+                        <div style="flex-grow: 1; position: relative;">
+                            <canvas id="dateChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="text-align: center; margin-bottom: 30px; font-size: 1.5rem;" class="fade-in">🛡 수집된 최신 뉴스 피드</h3>
+                <div class="news-preview-grid">
+                    <!-- News Item 1 -->
+                    <div class="news-card-embedded fade-in">
+                        <div class="news-card-header">
+                            <span style="color: var(--accent-4)">v.daum.net</span>
+                            <span class="safety-badge safe">Clean: 80%</span>
+                        </div>
+                        <h4 style="margin-bottom: 10px; font-size: 1.1rem;">기안84, 新브로맨스 멤버 찾았다 '아이돌과 데이트'</h4>
+                        <div class="monitor-box">
+                            <div style="color: var(--shinee-mint); font-weight: 700; margin-bottom: 5px;">🛡 AI 실시간 모니터링</div>
+                            <div class="toxic-msg">● ** ** 댓글입니다 무시하세요.</div>
+                            <div style="opacity: 0.8;">● 키 활동 너무 기대돼요!</div>
+                        </div>
+                    </div>
+                    <!-- News Item 2 -->
+                    <div class="news-card-embedded fade-in">
+                        <div class="news-card-header">
+                            <span style="color: var(--accent-4)">OSEN</span>
+                            <span class="safety-badge safe">Clean: 87%</span>
+                        </div>
+                        <h4 style="margin-bottom: 10px; font-size: 1.1rem;">샤이니 온유, 더 깊어진 분위기 'TOUGH LOVE' 컴백</h4>
+                        <div class="monitor-box">
+                            <div style="color: var(--shinee-mint); font-weight: 700; margin-bottom: 5px;">🛡 AI 실시간 모니터링</div>
+                            <div style="opacity: 0.8;">● 온유 목소리 진짜 독보적...</div>
+                            <div class="toxic-msg">● *** 소리 좀 안 나게 해라.</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -1182,6 +1304,51 @@
             if (itemSelect) itemSelect.addEventListener('change', updateDashboard);
             if (districtSelect) districtSelect.addEventListener('change', updateDashboard);
             if (forecastSlider) forecastSlider.addEventListener('input', updateDashboard);
+
+            // SHINee Dashboard Logic
+            const sourceData = {"v.daum.net": 15, "조선일보": 15, "한국일보": 6, "문화일보": 5, "뉴시스": 5, "노컷뉴스": 4, "starnewskorea.com": 4, "톱스타뉴스": 3};
+            const dateData = {"02-01": 1, "02-02": 2, "02-06": 4, "02-08": 1, "02-10": 2, "02-11": 3};
+
+            new Chart(document.getElementById('sourceChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(sourceData),
+                    datasets: [{
+                        data: Object.values(sourceData),
+                        backgroundColor: ['#6c5ce7', '#79e5cb', '#00cec9', '#fd79a8', '#a29bfe', '#55efc4', '#e17055', '#d63031'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom', labels: { color: '#8888a0' } } }
+                }
+            });
+
+            new Chart(document.getElementById('dateChart'), {
+                type: 'line',
+                data: {
+                    labels: Object.keys(dateData),
+                    datasets: [{
+                        label: '발행 건수',
+                        data: Object.values(dateData),
+                        borderColor: '#79e5cb',
+                        backgroundColor: 'rgba(121, 229, 203, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8888a0' } },
+                        x: { grid: { display: false }, ticks: { color: '#8888a0' } }
+                    }
+                }
+            });
 
             // Initial Trigger
             updateItemOptions();
