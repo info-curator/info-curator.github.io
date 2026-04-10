@@ -315,10 +315,15 @@ section {
 
 .project-card {
     perspective: 1000px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }
 
 .card-inner {
-    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
     padding: 2.5rem;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
@@ -330,9 +335,11 @@ section {
 }
 
 .project-card:hover .card-inner {
-    background: var(--bg-dark);
+    background: linear-gradient(135deg, var(--bg-dark), #1e293b);
     color: white;
-    transform: rotateY(10deg);
+    transform: translateY(-10px) rotateY(5deg);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    border-color: transparent;
 }
 
 .project-card h4 {
