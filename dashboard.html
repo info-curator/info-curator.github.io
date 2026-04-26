@@ -198,7 +198,7 @@
 
         .news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
             gap: 1.5rem;
         }
 
@@ -335,8 +335,10 @@
             50% { opacity: 0.4; transform: scale(0.8); }
         }
 
+        /* ── Tablet (≤1024px) ── */
         @media (max-width: 1024px) {
             .stats-section { grid-template-columns: 1fr; }
+            .chart-card { height: 400px; }
         }
 
         /* ── Mobile (≤768px) ── */
@@ -345,54 +347,92 @@
 
             .glass-header {
                 flex-direction: column;
-                gap: 1rem;
-                padding: 1.2rem 1.5rem;
+                gap: 0.75rem;
+                padding: 1.2rem;
                 border-radius: 16px;
-                text-align: center;
                 margin-bottom: 1.5rem;
+                align-items: stretch;
             }
 
-            .logo-area h1 { font-size: 1.3rem; }
+            .logo-area h1 { font-size: 1.35rem; }
+            .logo-area i { width: 24px; height: 24px; }
+
+            /* Header right side: stack vertically, full width */
+            .header-right {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.6rem;
+            }
+
+            .update-badge {
+                justify-content: center;
+                font-size: 0.78rem;
+            }
 
             .live-clock {
-                font-size: 0.9rem;
-                padding: 0.4rem 1rem;
-                flex-wrap: wrap;
+                font-size: 0.88rem;
+                padding: 0.5rem 1rem;
                 justify-content: center;
+                border-radius: 12px;
             }
 
-            .glass-card { padding: 1.5rem; border-radius: 16px; }
-            .glass-card h2 { font-size: 1.1rem; }
+            /* Charts: reduce fixed height */
+            .chart-card { height: 340px; }
 
-            .chart-container { height: 220px; }
+            .glass-card { padding: 1.25rem; border-radius: 16px; }
+            .glass-card h2 { font-size: 1.05rem; flex-wrap: wrap; }
 
-            .stats-section { gap: 1.5rem; }
+            .chart-container { height: 230px; }
 
-            .news-grid {
-                grid-template-columns: 1fr;
-            }
+            .stats-section { gap: 1rem; }
+            .dashboard-grid { gap: 2rem; }
+
+            /* News */
+            .news-grid { grid-template-columns: 1fr; gap: 1rem; }
 
             .category-header {
-                font-size: 1.2rem;
-                flex-direction: column;
-                align-items: flex-start;
+                font-size: 1.1rem;
+                flex-wrap: wrap;
                 gap: 0.5rem;
+                padding-left: 0.75rem;
             }
 
-            .news-title { font-size: 1rem; }
-            .news-summary { font-size: 0.88rem; -webkit-line-clamp: 2; }
+            .category-block { margin-bottom: 2rem; }
 
-            /* hide update badge on very small */
-            #live-date { font-size: 0.75rem; }
+            .news-title { font-size: 1rem; }
+            .news-summary { font-size: 0.875rem; }
+            .news-content { padding: 1.2rem; }
+
+            /* Refresh button: smaller */
+            .refresh-btn { padding: 0.35rem 0.75rem; font-size: 0.82rem; }
+
+            #live-date { font-size: 0.72rem; }
             #live-time { font-size: 0.95rem; }
         }
 
-        /* ── Small Mobile (≤400px) ── */
-        @media (max-width: 400px) {
-            .logo-area h1 { font-size: 1.1rem; }
-            .glass-header { padding: 1rem; }
-            .dashboard-wrapper { padding: 0.75rem; }
-            .glass-card { padding: 1.2rem; }
+        /* ── Small Mobile (≤480px) ── */
+        @media (max-width: 480px) {
+            .dashboard-wrapper { padding: 0.875rem; }
+            .logo-area h1 { font-size: 1.15rem; }
+            .glass-card { padding: 1rem; }
+            .chart-card { height: 300px; }
+            .chart-container { height: 200px; }
+            .news-card { border-radius: 12px; }
+            /* Google Trends 링크 숨김 (너무 좁을 때) */
+            .trends-link-mobile-hide { display: none; }
+        }
+
+        /* ── Very Small Mobile (≤360px) ── */
+        @media (max-width: 360px) {
+            .dashboard-wrapper { padding: 0.6rem; }
+            .glass-header { padding: 1rem; border-radius: 12px; }
+            .logo-area h1 { font-size: 1rem; }
+            .glass-card { padding: 0.875rem; border-radius: 12px; }
+            .chart-card { height: 260px; }
+            .chart-container { height: 180px; }
+            .category-header { font-size: 0.95rem; }
+            .news-title { font-size: 0.92rem; }
+            .news-summary { font-size: 0.82rem; }
         }
     </style>
 </head>
@@ -405,8 +445,8 @@
                 <i data-lucide="cpu"></i>
                 <h1>Samsung Real-time Monitor</h1>
             </div>
-            <div style="display:flex; align-items:center; gap:1rem;">
-                <div style="background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); color:#10b981; padding:0.4rem 1rem; border-radius:20px; font-size:0.82rem; font-weight:600; display:flex; align-items:center; gap:0.4rem;">
+            <div class="header-right" style="display:flex; align-items:center; gap:1rem;">
+                <div class="update-badge" style="background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); color:#10b981; padding:0.4rem 1rem; border-radius:20px; font-size:0.82rem; font-weight:600; display:flex; align-items:center; gap:0.4rem;">
                     <span style="width:7px;height:7px;border-radius:50%;background:#10b981;display:inline-block;animation:pulse-dot 2s infinite;"></span>
                     1시간마다 자동 업데이트
                 </div>
@@ -423,29 +463,30 @@
         <main class="dashboard-grid">
             <!-- Charts Section -->
             <section class="stats-section">
-                <div class="glass-card" style="height: 500px; display:flex; flex-direction:column;">
+                <div class="glass-card chart-card" style="min-height:360px; height:500px; display:flex; flex-direction:column;">
                     <h2><i data-lucide="pie-chart"></i> 오늘 가장 많이 언급된 삼성 사업부는?</h2>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; margin-top: -1rem; display:flex; align-items:center; gap:0.3rem;">
-                        <i data-lucide="info" style="width:14px; height:14px;"></i> 데이터 출처: 구글 뉴스 RSS 실시간 보도량 기반 | 삼성 사업부 표준 분류
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; margin-top: -1rem; display:flex; align-items:center; gap:0.3rem; flex-wrap:wrap;">
+                        <i data-lucide="info" style="width:14px; height:14px; flex-shrink:0;"></i> 데이터 출처: 구글 뉴스 RSS 실시간 보도량 기반 | 삼성 사업부 표준 분류
                     </p>
                     <div class="chart-container" style="flex:1; min-height:0;">
                         <canvas id="categoryChart"></canvas>
                     </div>
                 </div>
 
-                <div class="glass-card" style="height: 500px; display:flex; flex-direction:column;">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.4rem;">
+                <div class="glass-card chart-card" style="min-height:360px; height:500px; display:flex; flex-direction:column;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.4rem; flex-wrap:wrap;">
                         <h2 style="margin-bottom: 0;"><i data-lucide="trending-up"></i> 실시간 핫 키워드 TOP 10</h2>
                         <a href="https://trends.google.co.kr/explore?q=%EC%82%BC%EC%84%B1&date=now%201-d&geo=KR"
                            target="_blank"
+                           class="trends-link-mobile-hide"
                            style="flex-shrink:0; font-size:0.8rem; color:var(--accent); text-decoration:none; border:1px solid rgba(56,189,248,0.3); padding:0.3rem 0.7rem; border-radius:6px; white-space:nowrap; display:flex; align-items:center; gap:0.3rem; transition: background 0.2s;"
                            onmouseover="this.style.background='rgba(56,189,248,0.1)'" onmouseout="this.style.background='transparent'">
                             <i data-lucide="external-link" style="width:12px; height:12px;"></i> Google Trends 열기
                         </a>
                     </div>
                     <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.8rem; display:flex; align-items:center; gap:0.3rem; flex-wrap:wrap;">
-                        <i data-lucide="info" style="width:14px; height:14px;"></i>
-                        데이터 출처: <strong style="color:var(--text-main); margin:0 0.2rem;">Google Trends</strong> &middot; '삼성' 검색어 &middot; 대한민국 &middot; 최근 1일 &nbsp;
+                        <i data-lucide="info" style="width:14px; height:14px; flex-shrink:0;"></i>
+                        데이터 출처: <strong style="color:var(--text-main); margin:0 0.2rem;">Google Trends</strong> &middot; '삼성' &middot; 최근 1일 &nbsp;
                         <span id="trend-update-date" style="color:var(--accent); font-weight:600;"></span>
                     </p>
                     <div class="chart-container" style="flex:1; min-height:0;">
